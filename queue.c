@@ -148,9 +148,11 @@ bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
         return false;
     list_ele_t *temp = q->head;
     // Check sp and bufsize availability
-    if (sp && (temp->value) && bufsize) {
-        strncpy(sp, temp->value, bufsize - 1);
-        sp[bufsize - 1] = '\0';
+    if (temp->value) {
+        if (sp && bufsize) {
+            strncpy(sp, temp->value, bufsize - 1);
+            sp[bufsize - 1] = '\0';
+        }
         // Release value memory
         free(temp->value);
         temp->value = NULL;
